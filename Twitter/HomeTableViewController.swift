@@ -22,7 +22,7 @@ class HomeTableViewController: UITableViewController {
     
     func loadTweet(){
         
-        let myURL = "GET https://api.twitter.com/1.1/statuses/home_timeline.json"
+        let myURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         let myParams = ["count" : 10]
             
         TwitterAPICaller.client?.getDictionariesRequest(url: myURL, parameters: myParams, success: { (tweets : [NSDictionary]) in
@@ -56,8 +56,8 @@ class HomeTableViewController: UITableViewController {
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetContent.text = self.tweetArray[indexPath.row]["text"] as? String
         
-        let imageStr = user["profile_image_url_https"] as? String
-        let imageURL = URL(string: imageStr!)
+//        let imageStr = user["profile_image_url_https"] as? String
+        let imageURL = URL(string: (user["profile_image_url_https"] as? String)!)
         let data = try? Data(contentsOf: imageURL!)
         
         if let imageData = data {
